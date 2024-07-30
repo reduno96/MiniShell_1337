@@ -6,7 +6,7 @@
 /*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:49:25 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/07/28 21:44:53 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:19:58 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,14 @@ void					ft_lexer(char *input, t_command **x);
 
 
 
-void  	ft_exute( t_command *list , char **env);
-int 	ft_strcmp(char *s1, char *s2);
+void  		ft_exute( t_command *list , char **env);
+int 		ft_strcmp(char *s1, char *s2);
+char 		**create_argv(t_command *elem) ;
+char 		*path_command(char *ptr);
 
 
 ///////            Commands         ///////
-void 	ft_cd(t_command *list);
-void 	ft_pwd(t_command *va_list);
+void 		ft_cd(t_command *list);
+void 		ft_pwd(t_command *va_list);
 
 #endif
