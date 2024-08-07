@@ -4,15 +4,7 @@ void ft_cd(t_command *list)
 {
 	char *path ;
 
-	while (list != NULL  && list->type == 32)
-		list = list->next;
-	
-
-		list = list->next;
-			while (list != NULL  && list->type == 32)
-				list = list->next;
-			
-			if (list == NULL)
+			if (list->arg[1] == NULL)
 			{
 				path = getenv("HOME");
 				if (chdir(path) == -1)
@@ -20,7 +12,7 @@ void ft_cd(t_command *list)
 			}
 			else
 			{
-				path = list->str_input;
+				path = list->arg[1];
 				if (chdir(path) == -1)
 					perror("No such file or directory");
 			}

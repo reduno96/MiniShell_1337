@@ -21,4 +21,4 @@ export CPPFLAGS="-I/goinfre/bouhammo/homebrew/opt/readline/include"
 
 source ~/.zshrc
 
-#gcc -Wall -Wextra -Werror main.c -lreadline -L/goinfre/rel-mora/homebrew/opt/readline/lib -I/goinfre/rel-mora/homebrew/opt/readline/include
+#gcc -Wall -Wextra -Werror main.c -lreadline -L/goinfre/bouhammo/homebrew/opt/readline/lib -I/goinfre/bouhammo/homebrew/opt/readline/include

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-mora <rel-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 11:51:25 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/07/27 11:31:03 by rel-mora         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:30:36 by rel-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_command *lst, void (*del)(void *))
+void	ft_lstdelone(t_splitor *lst, void (*del)(void *))
 {
 	if (!lst || !del)
 		return ;
-	del(lst->str_input);
+	del(lst->in);
 	free(lst);
 }

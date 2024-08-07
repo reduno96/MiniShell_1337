@@ -13,11 +13,11 @@ int ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 
 }
-char **create_argv(t_command *elem) 
+char **create_argv(t_splitor *elem) 
 {
 	int count = 0;
 	char **argv;
-	t_command *tmp ;
+	t_splitor *tmp ;
 
 	tmp = elem;
 	while (tmp)
@@ -32,7 +32,7 @@ char **create_argv(t_command *elem)
 	int i = 0;
 	while (tmp)
 	{
-		argv[i] = ft_strdup(tmp->str_input);
+		argv[i] = ft_strdup(tmp->in);
 		if(!argv[i])
 		{
 			int j = 0;
@@ -52,10 +52,10 @@ char **create_argv(t_command *elem)
 
 char 	*path_command(char *ptr)
 {
-	// printf("------------------------------->>>>>>>>>>>>>> ptr = %s\n", ptr);
 	char *path;
 	char **list;
 	int i=0;
+	int a;
 
 	path  = getenv("PATH");
 	if(!path)
@@ -66,11 +66,10 @@ char 	*path_command(char *ptr)
 	{
 		char *tmp = ft_strjoin(list[i], "/");
 		char *tmp2 = ft_strjoin(tmp, ptr);
-		free(tmp);
-		if (access(tmp2, F_OK) == 0)
+		a = access(tmp2, X_OK) ;
+		if (a == 0)
 		{
 			free(ptr);
-			free(tmp2);
 			return tmp2;
 		}
 		else
@@ -81,6 +80,5 @@ char 	*path_command(char *ptr)
 	}
 	free(ptr);
 	ptr =NULL;
-
 return ptr;
 }

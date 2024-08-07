@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:23:44 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/07/28 21:15:35 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/07 07:53:11 by rel-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_t_command(t_command *cmd)
+void	print_t_command(t_splitor *cmd)
 {
 	if (cmd == NULL)
 	{
@@ -21,34 +21,36 @@ void	print_t_command(t_command *cmd)
 	}
 	while (cmd != NULL)
 	{
-		printf("---------------------------------------------------------------------------------\n");
-		printf("str_input: %s | ", cmd->str_input);
-		printf("len: %d		  | ", cmd->len);
-		printf("token: %d	  | ", cmd->type);
+		printf("str_input: %s | ", cmd->in);
+		printf("len: %d			| ", cmd->len);
+		printf("token: %d		| ", cmd->type);
 		if (cmd->state == 2)
-			printf("state: GENERAL 	 |\n");
+			printf("state: GENERAL 		|\n");
 		if (cmd->state == 1)
-			printf("state: IN_SINGLE |\n");
+			printf("state: IN_SINGLE	|\n");
 		if (cmd->state == 0)
-			printf("state: IN_DOUBLE  |\n");
+			printf("state: IN_DOUBLE	|\n");
 		cmd = cmd->next;
-		printf("---------------------------------------------------------------------------------\n");
+		printf("--------------------\n");
 	}
 }
 
 int	ft_search(char *s, char *d)
 {
 	int	i;
+	int	j;
+	int	len;
 
 	i = 0;
-	while (s[i])
+	j = 0;
+	len = ft_strlen(s);
+	while (s[i] && s[i])
 	{
-		if (s[i] == d[i])
-			i++;
-		else if (d[i] == '\0')
+		if (s[i] == d[j])
+			j++;
+		if (len == j && s[i + 1] == d[j])
 			return (1);
-		else
-			break ;
+		i++;
 	}
 	return (0);
 }
