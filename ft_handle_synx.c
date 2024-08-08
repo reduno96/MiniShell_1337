@@ -29,7 +29,7 @@ void	ft_check_env(t_splitor **x, t_envarment *my_env)
 				{
 					free(tmp_cmd->in);
 					tmp_cmd->in = ft_strdup(tmp_env->data);
-					break ;
+					// break ;
 				}
 				tmp_env = tmp_env->next;
 			}

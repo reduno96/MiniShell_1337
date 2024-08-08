@@ -34,8 +34,8 @@ void  ft_exute( t_envarment *var , t_command *list , t_splitor *x)
 		ft_pwd(list);
 	}
 	
-	// else if(ft_strcmp(list->str_input, "export") == 0)
-	// 	ft_export(var , list );
+	else if(ft_strcmp(list->content, "export") == 0)
+		ft_export(var , list );
 		
 	// else if(ft_strcmp(list->str_input, "unset") == 0)
 	// 	ft_unset(var , list );
@@ -52,6 +52,7 @@ void  ft_exute( t_envarment *var , t_command *list , t_splitor *x)
 			perror("fork");
 		else if(pid == 0)
 		{
+			printf("----------------------------->>>>>  %s \n", list->arg[0]);
 			char *ptr = path_command(list->arg[0]);
 			if (!ptr)
 			{

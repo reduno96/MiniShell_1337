@@ -95,13 +95,14 @@ void	ft_command(t_splitor **x, t_envarment **my_env, t_command **cmd)
 		i = 0;
 		while (tmp_cmd->arg[i] != NULL)
 		{
-			printf("Argument: %s \n", tmp_cmd->arg[i]);
-			printf("content %s \n", tmp_cmd->content);
-			printf("==dir_in< : %s\n", tmp_cmd->doc->dir_in);
-			printf("==dir_out> : %s\n ", tmp_cmd->doc->dir_out);
-			printf("==doc_here<< : %s\n", tmp_cmd->doc->doc_here);
-			printf("==rdir>> : %s \n", tmp_cmd->doc->rdir);
-			printf("==store>> : %s \n", tmp_cmd->doc->store);
+			printf("Argument:      %s \n", tmp_cmd->arg[i]);
+			printf("content      : %s \n", tmp_cmd->content);
+			printf("dir_in    <  : %s\n", tmp_cmd->doc->dir_in);
+			printf("dir_out   >  : %s\n ", tmp_cmd->doc->dir_out);
+			printf("doc_here  << : %s\n", tmp_cmd->doc->doc_here);
+			printf("rdir      >> : %s \n", tmp_cmd->doc->rdir);
+			printf("store     >> : %s \n", tmp_cmd->doc->store);
+			printf("next           %p \n", tmp_cmd->next);
 			printf("---------------------------------------------\n");
 			i++;
 		}
