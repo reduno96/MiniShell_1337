@@ -1,23 +1,23 @@
 #include "../minishell.h" 
 
-t_environment *ft_stock_envarment(char **env)
+t_envarment *ft_stock_envarment(char **env)
 {
-	t_environment *var=NULL;
+	t_envarment *var=NULL;
 	char **list;
 	int i =0;
 	while (env[i])
 	{
 		list = ft_split(env[i], '=');
-		t_environment *elem = new_node(list[0],list[1]);
+		t_envarment *elem = new_node(list[0],list[1]);
 		add_back_node(&var , elem);
 		free(list);
 		i++;
 	}
 	return var;
 }
-int 	test_exist(t_environment *var , char **list)
+int 	test_exist(t_envarment *var , char **list)
 {
-	t_environment *ptr;
+	t_envarment *ptr;
 	ptr = var;
 	while (ptr)
 	{
@@ -45,7 +45,7 @@ int 	test_exist(t_environment *var , char **list)
 	return 1;
 	
 }
-void 	ft_export( t_environment *var ,t_command *str )
+void 	ft_export( t_envarment *var ,t_command *str )
 {
 	char **list;
 	t_command *save = str;
@@ -61,12 +61,12 @@ void 	ft_export( t_environment *var ,t_command *str )
 			}
 			if(list[1] == NULL)
 			{
-				t_environment *elem = new_node(list[0], "''");
+				t_envarment *elem = new_node(list[0], "''");
 				add_back_node(&var , elem);
 			}
 			else
 			{
-				t_environment *elem = new_node(list[0],list[1]);
+				t_envarment *elem = new_node(list[0],list[1]);
 				add_back_node(&var , elem);
 			}
 			free(list);
@@ -76,7 +76,7 @@ void 	ft_export( t_environment *var ,t_command *str )
 	save = save->next;
 	if(save->next == NULL)
 	{
-		t_environment *ptr;
+		t_envarment *ptr;
 		ptr = var;
 		while (ptr)
 		{

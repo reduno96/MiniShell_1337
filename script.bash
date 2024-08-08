@@ -14,11 +14,11 @@ brew link readline --force
 brew --prefix readline
 
 
-export LDFLAGS="-L/goinfre/bouhammo/homebrew/opt/readline/lib"
-export CPPFLAGS="-I/goinfre/bouhammo/homebrew/opt/readline/include"
+export LDFLAGS="-L/goinfre/rel-mora/homebrew/opt/readline/lib"
+export CPPFLAGS="-I/goinfre/rel-mora/homebrew/opt/readline/include"
 
 
 
 source ~/.zshrc
 
-#gcc -Wall -Wextra -Werror main.c -lreadline -L/goinfre/bouhammo/homebrew/opt/readline/lib -I/goinfre/bouhammo/homebrew/opt/readline/include
+#gcc -Wall -Wextra -Werror main.c -lreadline -L/goinfre/rel-mora/homebrew/opt/readline/lib -I/goinfre/rel-mora/homebrew/opt/readline/include

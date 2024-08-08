@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void 	ft_env( t_environment *var ,t_command *str )
+void 	ft_env( t_envarment *var ,t_command *str )
 {
 	printf("env							**************\n");
 	char **list;
@@ -19,14 +19,14 @@ void 	ft_env( t_environment *var ,t_command *str )
 			}
 			if(list[1] == NULL)
 			{
-				t_environment *elem = new_node(list[0], "");
+				t_envarment *elem = new_node(list[0], "");
 				add_back_node(&var , elem);
 				affiche_free_env(var, save);
 				free(elem);
 			}
 			else
 			{
-				t_environment *elem = new_node(list[0],list[1]);
+				t_envarment *elem = new_node(list[0],list[1]);
 				add_back_node(&var , elem);
 				affiche_free_env(var, save);
 				free(elem);
@@ -36,12 +36,12 @@ void 	ft_env( t_environment *var ,t_command *str )
 		str = str->next;
 	}
 }
-void   affiche_free_env(t_environment *var , t_command *save)
+void   affiche_free_env(t_envarment *var , t_command *save)
 {
 	save = save->next;
 	if(save->next == NULL)
 	{
-		t_environment *ptr;
+		t_envarment *ptr;
 		ptr = var;
 		while (ptr)
 		{

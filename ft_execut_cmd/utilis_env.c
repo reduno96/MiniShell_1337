@@ -1,10 +1,10 @@
 #include "../minishell.h"
 
-t_environment  *new_node(void *var, void *data)
+t_envarment  *new_node(void *var, void *data)
 {
-        t_environment  *elem;
+        t_envarment  *elem;
 
-        elem = (t_environment *)malloc(sizeof(t_environment));
+        elem = (t_envarment *)malloc(sizeof(t_envarment));
         if (!elem)
                 return (NULL);
         elem->var = var;
@@ -14,9 +14,9 @@ t_environment  *new_node(void *var, void *data)
 }
 
 
-void    add_back_node(t_environment **lst, t_environment *new)
+void    add_back_node(t_envarment **lst, t_envarment *new)
 {
-        t_environment  *p;
+        t_envarment  *p;
 
         p = *lst;
         if (!lst || !new)

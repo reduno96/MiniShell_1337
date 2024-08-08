@@ -1,9 +1,9 @@
 #include "../minishell.h"
 
 
-void 	ft_unset(t_environment *var , t_command *list)
+void 	ft_unset(t_envarment *var , t_command *list)
 {
-	t_environment *env, *env_1;
+	t_envarment *env, *env_1;
 	env = var;
 	env_1 = var;
 

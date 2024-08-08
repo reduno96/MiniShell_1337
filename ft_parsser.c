@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 18:00:47 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/07 21:16:57 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/07 21:27:21 by rel-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_count_parameters(t_splitor *tmp_x, int *count)
 	}
 }
 
-void	ft_command(t_splitor **x, t_environment **my_env, t_command **cmd)
+void	ft_command(t_splitor **x, t_envarment **my_env, t_command **cmd)
 {
 	int			count;
 	t_splitor	*tmp_x;
@@ -97,10 +97,11 @@ void	ft_command(t_splitor **x, t_environment **my_env, t_command **cmd)
 		{
 			printf("Argument: %s \n", tmp_cmd->arg[i]);
 			printf("content %s \n", tmp_cmd->content);
-			printf("dir_in   {<} : %s\n", tmp_cmd->doc->dir_in);
-			printf("dir_out  {>} : %s\n ", tmp_cmd->doc->dir_out);
-			printf("doc_here {<<}: %s\n", tmp_cmd->doc->doc_here);
-			printf("rdir     {>>} : %s \n", tmp_cmd->doc->rdir);
+			printf("==dir_in< : %s\n", tmp_cmd->doc->dir_in);
+			printf("==dir_out> : %s\n ", tmp_cmd->doc->dir_out);
+			printf("==doc_here<< : %s\n", tmp_cmd->doc->doc_here);
+			printf("==rdir>> : %s \n", tmp_cmd->doc->rdir);
+			printf("==store>> : %s \n", tmp_cmd->doc->store);
 			printf("---------------------------------------------\n");
 			i++;
 		}

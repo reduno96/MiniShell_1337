@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:49:25 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/07 22:02:32 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/07 22:03:19 by rel-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,43 +36,46 @@
 # include <unistd.h>
 
 // function we use
-int				ft_search(char *s, char *d);
-int				ft_isspace(char c);
-void			print_str_input(void *str_input);
-void			print_t_command(t_splitor *cmd);
-t_token			ft_get_token(char str_input);
-int				ft_check_input(char str_input);
-t_state			ft_get_state(t_idx *var, char str_input);
-int				ft_handler_syn_error(t_splitor **x);
-void			ft_lexer(char *input, t_splitor **x);
+int			ft_search(char *s, char *d);
+int			ft_isspace(char c);
+void		print_str_input(void *str_input);
+void		print_t_command(t_splitor *cmd);
+t_token		ft_get_token(char str_input);
+int			ft_check_input(char str_input);
+t_state		ft_get_state(t_idx *var, char str_input);
+int			ft_handler_syn_error(t_splitor **x);
+void		ft_lexer(char *input, t_splitor **x);
 
-void			ft_fill_env(t_environment **my_env, char **env);
-int				ft_search_env(char *s, char *d);
-void			ft_check_env(t_splitor **x, t_environment *my_env);
-void			ft_add_node(t_environment **lst, t_environment *new);
-t_environment	*ft_new_node(void *content);
-t_environment	*ft_last_node(t_environment *lst);
-void			check_syn(t_splitor **x);
-void			ft_free_env(t_splitor *x);
-void			ft_free_command(t_command *lst);
-void			ft_add_command(t_command **lst, t_command *new);
+t_envarment	*new_node(void *var, void *data);
 
-void			ft_skeep_space(t_splitor **tmp_x);
+void		add_back_node(t_envarment **lst, t_envarment *new);
 
-int				ft_check_command(t_splitor *tmp_x);
+t_envarment	*ft_stock_envarment(char **env);
+int			ft_search_env(char *s, char *d);
+void		ft_check_env(t_splitor **x, t_envarment *my_env);
+void		ft_add_node(t_envarment **lst, t_envarment *new);
 
-t_command		*ft_new_command(int count, t_splitor **tmp_x);
-t_command		*ft_last_command(t_command *lst);
-void			ft_command(t_splitor **x, t_environment **my_env,
-					t_command **cmd);
-void			print_env(t_environment **my_env);
-void			ft_check_doc(t_command **new_node);
+void		check_syn(t_splitor **x);
+void		ft_free_env(t_splitor *x);
+void		ft_free_command(t_command *lst);
+void		ft_add_command(t_command **lst, t_command *new);
+
+void		ft_skeep_space(t_splitor **tmp_x);
+
+int			ft_check_command(t_splitor *tmp_x);
+
+t_command	*ft_new_command(int count, t_splitor **tmp_x);
+t_command	*ft_last_command(t_command *lst);
+void		ft_command(t_splitor **x, t_envarment **my_env, t_command **cmd);
+void		print_env(t_envarment **my_env);
+void		ft_check_doc(t_command **new_node, t_splitor *tmp);
+
 
 
 
 //////////////////////  Execution  ////////////////////////
 
-void  		ft_exute(t_environment *var, t_command *list , t_splitor *x);
+void  		ft_exute(t_envarment *var, t_command *list , t_splitor *x);
 int 		ft_strcmp(char *s1, char *s2);
 char 		**create_argv(t_splitor *elem) ;
 char 		*path_command(char *ptr);
@@ -91,5 +94,7 @@ void 		ft_pwd(t_command *va_list);
 // void 		ft_export( t_envarment *var , t_command *str);
 // void 		ft_unset(t_envarment *var , t_command *list);
 // void 		ft_env( t_envarment *var ,t_command *str );
+
+
 
 #endif

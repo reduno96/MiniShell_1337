@@ -13,7 +13,7 @@
 #include "../minishell.h"
 
 
-void  ft_exute( t_environment *var , t_command *list , t_splitor *x)
+void  ft_exute( t_envarment *var , t_command *list , t_splitor *x)
 {
 
 	(void) var;
@@ -31,7 +31,6 @@ void  ft_exute( t_environment *var , t_command *list , t_splitor *x)
 		
 	else if (ft_strcmp(list->content, "pwd") == 0 )
 	{
-		printf("+++++++++++++++++++++++++++ %s\n", list->content);
 		ft_pwd(list);
 	}
 	
@@ -74,28 +73,5 @@ void  ft_exute( t_environment *var , t_command *list , t_splitor *x)
 			if(wait(&status) == -1)
 				perror("wait");
 		}
-		
-
-
-
-
+	}
 }
-}
-			// t_command *ptr;
-			// ptr = elem;
-			// while (ptr !=  NULL)
-			// {
-			// 	printf(" ---> %s\n", ptr->str_input);
-			// 	ptr = ptr->next;
-			// }
-	// }
-
-
-	
-	// (void) env;
-	// int i = 0;
-	// while (list !=  NULL)
-	// {
-	// 	printf("---===--> %s\n", list->str_input);
-	// 	list = list->next;
-	// }
