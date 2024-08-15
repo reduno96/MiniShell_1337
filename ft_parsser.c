@@ -3,40 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
+/*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 18:00:47 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/07 21:27:21 by rel-mora         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:38:58 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_add_command(t_command **lst, t_command *new)
+int	ft_check_command(t_splitor *tmp_x)
 {
-	t_command	*last;
-
-	if (!lst || !new)
-		return ;
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{
-		last = ft_last_command(*lst);
-		last->next = new;
-	}
-}
-
-t_command	*ft_last_command(t_command *lst)
-{
-	t_command	*last;
-
-	last = lst;
-	if (!lst)
-		return (NULL);
-	while (last->next != NULL)
-		last = last->next;
-	return (last);
+	if (tmp_x != NULL && tmp_x->state == G && tmp_x->type != '\"'
+		&& tmp_x->type != '\'' && tmp_x->type != '|')
+		return (1);
+	else if (tmp_x != NULL && (tmp_x->state == D || tmp_x->state == S)
+		&& tmp_x->type != '|')
+		return (1);
+	else if (tmp_x != NULL && (tmp_x->state == D || tmp_x->state == S))
+		return (1);
+	return (0);
 }
 
 void	ft_count_d_s(t_splitor **tmp, int *count)
@@ -57,7 +43,7 @@ void	ft_count_parameters(t_splitor *tmp_x, int *count)
 	{
 		while (tmp != NULL && tmp->type != '|')
 		{
-			ft_skeep_space(&tmp);
+			ft_skip_spaces(&tmp);
 			if (tmp != NULL && tmp->state == G && tmp->type != '\"'
 				&& tmp->type != '\'' && tmp->type != '|')
 			{
@@ -73,14 +59,14 @@ void	ft_count_parameters(t_splitor *tmp_x, int *count)
 	}
 }
 
-void	ft_command(t_splitor **x, t_envarment **my_env, t_command **cmd)
+void	ft_command(t_splitor **x, t_command **cmd)
 {
 	int			count;
 	t_splitor	*tmp_x;
 	t_command	*tmp_cmd;
 	int			i;
 
-	(void)my_env;
+	i = 0;
 	tmp_x = *x;
 	while (tmp_x != NULL)
 	{
@@ -90,22 +76,59 @@ void	ft_command(t_splitor **x, t_envarment **my_env, t_command **cmd)
 		ft_add_command(cmd, ft_new_command(count, &tmp_x));
 	}
 	tmp_cmd = *cmd;
+	i = 0;
 	while (tmp_cmd != NULL)
 	{
-		i = 0;
+		printf("\nCommand  <----------------------------------> \n");
+		printf("Content : %s \n", tmp_cmd->content);
+		if (tmp_cmd->arg[i] != NULL)
+			printf("Argument : ");
 		while (tmp_cmd->arg[i] != NULL)
 		{
-			printf("Argument:      %s \n", tmp_cmd->arg[i]);
-			printf("content      : %s \n", tmp_cmd->content);
-			printf("dir_in    <  : %s\n", tmp_cmd->doc->dir_in);
-			printf("dir_out   >  : %s\n ", tmp_cmd->doc->dir_out);
-			printf("doc_here  << : %s\n", tmp_cmd->doc->doc_here);
-			printf("rdir      >> : %s \n", tmp_cmd->doc->rdir);
-			printf("store     >> : %s \n", tmp_cmd->doc->store);
-			printf("next           %p \n", tmp_cmd->next);
-			printf("---------------------------------------------\n");
+			printf(" [%s] ", tmp_cmd->arg[i]);
 			i++;
 		}
+		printf("\n");
+		printf("doc:\n");
+		print_redirect_list(tmp_cmd->doc);
+		printf("\n");
+
+	
+		printf("///////////////////////////////////////////////////////////n\n");
+		// while (tmp_cmd->doc->store[i] != NULL)
+		// {
+		// 	printf("store: %s\n", tmp_cmd->doc->store[i]);
+		// 	i++;
+		// }
+
+		
 		tmp_cmd = tmp_cmd->next;
 	}
 }
+	// while (tmp_cmd != NULL)
+	// {
+	// 	printf("cmd ------------------<><><><>---------------------- \n");
+	// 	printf("content: %s \n", tmp_cmd->content);
+	// 	if (tmp_cmd->arg[i] != NULL)
+	// 		printf("argument: ");
+	// 	while (tmp_cmd->arg[i] != NULL)
+	// 	{
+	// 		printf(" %s ", tmp_cmd->arg[i]);
+	// 		i++;
+	// 	}
+	// 	printf("\n");
+	// 	printf("t_command ----> doc:\n");
+	// 	printf("dir_in: %d\n", tmp_cmd->doc->dir_in);
+	// 	printf("dir_out: %d\n", tmp_cmd->doc->dir_out);
+	// 	printf("rdir: %d\n", tmp_cmd->doc->rdir);
+	// 	printf("doc_here: %d\n", tmp_cmd->doc->doc_here);
+	// 	i = 0;
+	// 	printf("///////////////////////////////////////////////////////////n\n");
+	// 	// while (tmp_cmd->doc->store[i] != NULL)
+	// 	// {
+	// 	// 	printf("store: %s\n", tmp_cmd->doc->store[i]);
+	// 	// 	i++;
+	// 	// }
+		
+	// 	tmp_cmd = tmp_cmd->next;
+	// }

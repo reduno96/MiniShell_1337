@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
+/*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:49:25 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/07 22:03:19 by rel-mora         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:46:10 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,66 +36,88 @@
 # include <unistd.h>
 
 // function we use
+
+//////////////////////////////  Parsser  /////////////////////////////////
+// ---------
+void		print_t_command(t_splitor *cmd);
+void		print_redirect_list(t_redirect *head);
+// ---------
+void		ft_free_env(t_envarment **x);
+void		ft_free_lexer(t_splitor **x);
+void		ft_free_command(t_command *lst);
+// ---------
 int			ft_search(char *s, char *d);
 int			ft_isspace(char c);
-void		print_str_input(void *str_input);
-void		print_t_command(t_splitor *cmd);
 t_token		ft_get_token(char str_input);
 int			ft_check_input(char str_input);
 t_state		ft_get_state(t_idx *var, char str_input);
+int			ft_condition(t_splitor *start);
 int			ft_handler_syn_error(t_splitor **x);
 void		ft_lexer(char *input, t_splitor **x);
-
+// ---------
 t_envarment	*new_node(void *var, void *data);
-
 void		add_back_node(t_envarment **lst, t_envarment *new);
-
 t_envarment	*ft_stock_envarment(char **env);
-int			ft_search_env(char *s, char *d);
 void		ft_check_env(t_splitor **x, t_envarment *my_env);
-void		ft_add_node(t_envarment **lst, t_envarment *new);
-
-void		check_syn(t_splitor **x);
-void		ft_free_env(t_splitor *x);
-void		ft_free_command(t_command *lst);
+// ---------
+void		ft_command(t_splitor **x, t_command **cmd);
 void		ft_add_command(t_command **lst, t_command *new);
-
-void		ft_skeep_space(t_splitor **tmp_x);
-
-int			ft_check_command(t_splitor *tmp_x);
-
 t_command	*ft_new_command(int count, t_splitor **tmp_x);
 t_command	*ft_last_command(t_command *lst);
-void		ft_command(t_splitor **x, t_envarment **my_env, t_command **cmd);
-void		print_env(t_envarment **my_env);
-void		ft_check_doc(t_command **new_node, t_splitor *tmp);
-
-
-
+// ---------
+void		ft_not_pipe(t_command **new_node, int *i, t_splitor **tmp_x);
+int			ft_check_command(t_splitor *tmp_x);
+void		ft_skip_spaces(t_splitor **tmp_x);
+void		check_syn(t_splitor **x);
+// ---------
+void		ft_check_doc(t_command **new_node);
+t_redirect	*ft_new_redir(void *content, t_token type);
+void		ft_add_redir(t_redirect **lst, t_redirect *new);
+t_redirect	*ft_last_redir(t_redirect *lst);
 
 //////////////////////  Execution  ////////////////////////
 
-void  		ft_exute(t_envarment *var, t_command *list , t_splitor *x);
-int 		ft_strcmp(char *s1, char *s2);
-char 		**create_argv(t_splitor *elem) ;
-char 		*path_command(char *ptr);
-t_envarment *ft_stock_envarment(char **env);
-int 	test_exist(t_envarment *var , char **list);
+void            ft_exute(t_envarment *var, t_command *list , char **env);
+int             ft_strcmp(char *s1, char *s2);
+char            **create_argv(t_splitor *elem) ;
+char            *path_command(char *ptr);
+t_envarment 	*ft_stock_envarment(char **env);
+int             test_exist(t_envarment *var , char **list);
 
-// void   affiche_free_env(t_envarment *var , t_command *save);
-
-
-// //    export
-// t_envarment  *new_node(void *var, void *data);
-// void    	 add_back_node(t_envarment **lst, t_envarment *new);
-
-// ///////            Commands         ///////
-void 		ft_cd(t_command *list);
-void 		ft_pwd(t_command *va_list);
-void 		ft_export( t_envarment *var , t_command *str);
-// void 		ft_unset(t_envarment *var , t_command *list);
-// void 		ft_env( t_envarment *var ,t_command *str );
+void            free_args(char **args);// ft_export 
+char            **split_line(char *ptr);// ft_export
+char            **split_var(char *ptr);// ft_env
+void            print_export(t_envarment *var, t_command *str);
+void            execution_cmd(t_command         *list ,char **new, char **env);
+void            hundle_command(t_command *list ,char **env);
+int             pipe_exist(t_command *list);
+void			hundle_redirections(t_command *list);
 
 
+///////////////////////// Redirections  //////////////////////////
+void			hundle_redir_out(char 	*file);
+void			hundle_redir_in(char 	*file);
+void			hundle_dredir_out(char *file);
+
+
+
+/////////////////////////  function redirections  //////////////////////////
+char 			**get_len(char **args , t_redirect *redir);
+char			*git_type_redir(t_redirect *redir);
+char 			**ft_new_args(char **args , t_redirect *redir);
+int 			test_redir_here_doc(t_command *list);
+
+
+
+
+// ///////            Commands         //////////////////////////////////
+// int			builtin_cmd(t_envarment *var ,t_command *list ,char  **env);
+void            ft_cd(t_command *list);
+void            ft_pwd(t_command *va_list);
+void            ft_export( t_envarment *var , t_command *str);
+void            ft_env( t_envarment *var);
+void            ft_unset(t_envarment *var , t_command *list);
+void            ft_echo(t_command *list, char **env);
+void            ft_echo_flag(t_command *list);
 
 #endif

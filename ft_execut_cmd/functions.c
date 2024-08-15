@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   functions.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/09 19:20:09 by bouhammo          #+#    #+#             */
+/*   Updated: 2024/08/12 12:40:15 by bouhammo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 
@@ -56,27 +68,30 @@ char 	*path_command(char *ptr)
 	char **list;
 	int i=0;
 	int a;
+	char *tmp ;
+	char *tmp2;
 
 	path  = getenv("PATH");
 	if(!path)
 		perror("Error: PATH not found\n");
 	
 	list = ft_split(path, ':');
-	while (list)
+	while (list[i])
 	{
-		char *tmp = ft_strjoin(list[i], "/");
-		char *tmp2 = ft_strjoin(tmp, ptr);
-		a = access(tmp2, X_OK) ;
+		if(ptr[0] == '/')
+			tmp2 = ptr;
+		else
+		{
+			tmp = ft_strjoin(list[i], "/");
+			tmp2 = ft_strjoin(tmp, ptr);
+		}
+		a = access(tmp2, F_OK) ;
 		if (a == 0)
 		{
 			free(ptr);
 			return tmp2;
 		}
-		else
-		{
-			free(tmp2);
-			i++;
-		}
+		i++;
 	}
 	free(ptr);
 	ptr =NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
+/*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 07:58:38 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/07 21:37:38 by rel-mora         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:16:49 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_idx
 
 typedef enum e_token
 {
+	nothing = 0,
 	WORD = -1,
 	WHITE_SPACE = ' ',
 	NEW_LINE = '\n',
@@ -47,12 +48,9 @@ typedef struct s_path_file
 
 typedef struct s_redirect
 {
-	int					len;
-	char				*dir_in;
-	char				*dir_out;
-	char				*rdir;
-	char				*doc_here;
+	t_token				type;
 	char				*store;
+	struct s_redirect	*next;
 }						t_redirect;
 
 typedef enum e_state
@@ -73,8 +71,8 @@ typedef struct s_splitor
 
 typedef struct s_envarment
 {
-	void				*var;
-	void				*data;
+	char				*var;
+	char				*data;
 	struct s_envarment	*next;
 }						t_envarment;
 
