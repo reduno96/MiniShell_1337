@@ -6,7 +6,7 @@
 /*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:49:25 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/15 17:46:10 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:51:53 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		print_redirect_list(t_redirect *head);
 void		ft_free_env(t_envarment **x);
 void		ft_free_lexer(t_splitor **x);
 void		ft_free_command(t_command *lst);
+void		ft_free_split(char **list);
 // ---------
 int			ft_search(char *s, char *d);
 int			ft_isspace(char c);
@@ -53,7 +54,7 @@ int			ft_check_input(char str_input);
 t_state		ft_get_state(t_idx *var, char str_input);
 int			ft_condition(t_splitor *start);
 int			ft_handler_syn_error(t_splitor **x);
-void		ft_lexer(char *input, t_splitor **x);
+int			ft_lexer(char *input, t_splitor **x);
 // ---------
 t_envarment	*new_node(void *var, void *data);
 void		add_back_node(t_envarment **lst, t_envarment *new);
@@ -68,12 +69,18 @@ t_command	*ft_last_command(t_command *lst);
 void		ft_not_pipe(t_command **new_node, int *i, t_splitor **tmp_x);
 int			ft_check_command(t_splitor *tmp_x);
 void		ft_skip_spaces(t_splitor **tmp_x);
-void		check_syn(t_splitor **x);
 // ---------
 void		ft_check_doc(t_command **new_node);
 t_redirect	*ft_new_redir(void *content, t_token type);
 void		ft_add_redir(t_redirect **lst, t_redirect *new);
 t_redirect	*ft_last_redir(t_redirect *lst);
+
+
+
+
+
+
+
 
 //////////////////////  Execution  ////////////////////////
 
@@ -90,9 +97,8 @@ char            **split_var(char *ptr);// ft_env
 void            print_export(t_envarment *var, t_command *str);
 void            execution_cmd(t_command         *list ,char **new, char **env);
 void            hundle_command(t_command *list ,char **env);
-int             pipe_exist(t_command *list);
-void			hundle_redirections(t_command *list);
-
+bool			hundle_redirections(t_command *list);
+void			handle_pipe( t_command *list, char **env);
 
 ///////////////////////// Redirections  //////////////////////////
 void			hundle_redir_out(char 	*file);
@@ -106,6 +112,21 @@ char 			**get_len(char **args , t_redirect *redir);
 char			*git_type_redir(t_redirect *redir);
 char 			**ft_new_args(char **args , t_redirect *redir);
 int 			test_redir_here_doc(t_command *list);
+
+
+/////////////////////////  execut_cmd  //////////////////////////
+int             pipe_exist(t_command *list);
+int  			num_pipe(t_command *list);
+char 			*command_execut(t_command *list);
+int 			**return_pipe(int num_cmd);
+t_command 		*get_list_command(t_command *list);
+void    		close_free_wait( int *pids, int **pipefd, int num_cmd , t_command *tmp_cmd);
+void       	    child_process(int ** pipefd,int  i,t_command *tmp_cmd,char **env , int num_cmd);
+void 			handle_pipe(t_command *list, char **env);
+
+
+/////////////////////////  signal  //////////////////////////
+
 
 
 

@@ -6,13 +6,13 @@
 /*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 19:19:52 by bouhammo          #+#    #+#             */
-/*   Updated: 2024/08/09 19:19:53 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:02:52 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h" 
 
-// t_envarment *ft_stock_envarment(char **env)
+// t_envarment 		*ft_stock_envarment(char **env)
 // {
 // 	t_envarment *var=NULL;
 // 	char **list;

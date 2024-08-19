@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 07:58:38 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/13 13:16:49 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:59:43 by rel-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ typedef enum e_token
 	HERE_DOC,
 	DREDIR_OUT,
 }						t_token;
-
-typedef struct s_path_file
-{
-	char				**path;
-	struct s_path_file	*next;
-}						t_path_file;
 
 typedef struct s_redirect
 {
@@ -81,6 +75,8 @@ typedef struct s_command
 	char				*content;
 	char				**arg;
 	t_redirect			*doc;
+	char				**store_her;
+	int					len;
 	struct s_command	*next;
 }						t_command;
 

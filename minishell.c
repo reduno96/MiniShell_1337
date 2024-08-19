@@ -6,7 +6,7 @@
 /*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:08:06 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/13 17:20:35 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:56:50 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	print_envarment(t_envarment *env)
 	}
 }
 
+
+
 int	main(int ac, char **av, char **env)
 {
 	char		*str_input;
@@ -62,13 +64,19 @@ int	main(int ac, char **av, char **env)
 		if (ft_strlen(str_input) > 0)
 			add_history(str_input);
 			
-		ft_lexer(str_input, &x);
-		ft_check_env(&x, my_env);
-		ft_command(&x, &cmd);
-		
-		ft_exute(my_env, cmd, env);
-
-		ft_free_lexer(&x);
+		if (ft_lexer(str_input, &x))
+		{
+			ft_putstr_fd("Syntax Error:\n", 2);
+			ft_free_lexer(&x);
+		}
+		else
+		{		
+			ft_check_env(&x, my_env);
+			ft_command(&x, &cmd);
+			ft_exute(my_env, cmd, env);
+			ft_free_lexer(&x);
+		}
+	
 		ft_free_command(cmd);
 		x = NULL;
 		if (ft_search(str_input, "exit"))
@@ -77,7 +85,3 @@ int	main(int ac, char **av, char **env)
 	}
 	ft_free_env(&my_env);
 }
-
-
-
-
