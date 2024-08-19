@@ -6,7 +6,7 @@
 /*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:49:25 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/19 13:51:53 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:59:02 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,7 @@ void            ft_env( t_envarment *var);
 void            ft_unset(t_envarment *var , t_command *list);
 void            ft_echo(t_command *list, char **env);
 void            ft_echo_flag(t_command *list);
+void			ft_exit(t_envarment *var ,t_command *list);
+
 
 #endif

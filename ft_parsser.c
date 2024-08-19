@@ -6,7 +6,7 @@
 /*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 18:00:47 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/19 14:42:21 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:58:18 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	ft_command(t_splitor **x, t_command **cmd)
 			printf(" [%s] ", tmp_cmd->arg[i]);
 			i++;
 		}
-		i=0;
 		printf("\n");
 		printf("doc:\n");
 		print_redirect_list(tmp_cmd->doc);

@@ -6,7 +6,7 @@
 /*   By: bouhammo <bouhammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 20:46:31 by bouhammo          #+#    #+#             */
-/*   Updated: 2024/08/19 14:01:37 by bouhammo         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:58:00 by bouhammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void  ft_exute( t_envarment *var , t_command *list , char **env)
 		return ;
 	
 	if(ft_strcmp(list->content , "exit") == 0)
-		exit(0);
+		ft_exit(var , list);
 		
 	else if(ft_strcmp(list->content, "cd") == 0)
 		ft_cd(list);
