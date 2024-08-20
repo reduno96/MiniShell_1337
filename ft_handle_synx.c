@@ -6,7 +6,7 @@
 /*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 07:47:51 by rel-mora          #+#    #+#             */
-/*   Updated: 2024/08/19 01:01:51 by rel-mora         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:26:33 by rel-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	ft_condition(t_splitor *start)
 {
 	if ((start->type != ' ' && start->type != -1 && start->type != '$'
-			&& start->type != '\'' && start->type != '\"'))
+			&& start->type != '\'' && start->type != '\"'
+			&& start->type != HERE_DOC))
 		return (1);
 	return (0);
 }

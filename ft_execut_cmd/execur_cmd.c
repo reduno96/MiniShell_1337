@@ -6,7 +6,7 @@
 /*   By: rel-mora <reduno96@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:58 by bouhammo          #+#    #+#             */
-/*   Updated: 2024/08/19 17:30:22 by rel-mora         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:25:19 by rel-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	pipe_exist(t_command *list)
 	tmp = list;
 	while (tmp)
 	{
-		if (tmp->content[0] == '|')
+		if (tmp->content[0] == '|' && tmp->is_pipe == 1)
 			return (1);
 		tmp = tmp->next;
 	}
@@ -35,7 +35,7 @@ int	num_pipe(t_command *list)
 	i = 0;
 	while (tmp)
 	{
-		if (tmp->content[0] == '|')
+		if (tmp->content[0] == '|' && tmp->is_pipe == 1)
 			i++;
 		tmp = tmp->next;
 	}
@@ -93,7 +93,7 @@ t_command	*get_list_command(t_command *list)
 	prev = NULL;
 	while (list)
 	{
-		if (list->content[0] == '|')
+		if (tmp->content[0] == '|' && tmp->is_pipe == 1)
 			list = list->next;
 		else
 		{
